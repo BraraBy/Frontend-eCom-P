@@ -104,17 +104,17 @@ const Product = () => {
         {prevBtnEnabled && (
           <button
             onClick={scrollPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:bg-gray-100"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 outline-none "
           >
-            ←
+            <i className='bx bxs-chevron-left text-2xl text-gray-600 hover:text-red-300' ></i>
           </button>
         )}
         {nextBtnEnabled && (
           <button
             onClick={scrollNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow hover:bg-gray-100"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full outline-none "
           >
-            →
+            <i className='bx bxs-chevron-right text-2xl text-gray-600 hover:text-red-300' ></i>
           </button>
         )}
       </div>

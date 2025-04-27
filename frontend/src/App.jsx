@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <div className="flex justify-center h-auto overflow-y-auto">
-        <div className="bg-gray-100 min-h-screen w-screen overflow-x-hidden w-full">
+        <div className="bg-gray-100 min-h-screen w-screen overflow-x-hidden">
           <Header />
             <div className='h-[500px] rounded-lg'>
               <Banner />

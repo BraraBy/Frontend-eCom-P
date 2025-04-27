@@ -1,9 +1,46 @@
-import React from 'react';
+import React ,{ useState , useEffect , useRef }from 'react';
 
 const Header = () => {
+
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const [searchText, setSearchText] = useState('');
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(prev => !prev);
+  };
+
+  const toggleSearch = () => {
+    setIsSearchOpen(prev => !prev);
+  };
+
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+          setIsDropdownOpen(false);
+        }
+      };
+  
+      const handleEscape = (event) => {
+        if (event.key === 'Escape') {
+          setIsDropdownOpen(false);
+        }
+      };
+  
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscape);
+  
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+        document.removeEventListener('keydown', handleEscape);
+      };
+    }, );
+
   return (
     <header className="bg-white">
-      <div className="container mx-auto px-4 py-8 flex items-center">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         
         {/* logo */}
         <div className="mr-auto md:w-48 flex-shrink-0">
@@ -14,82 +51,103 @@ const Header = () => {
           />
         </div>
 
+        <div className="flex items-center space-x-2 flex-1 justify-end">
         {/* search */}
-        <div className="w-full max-w-xs xl:max-w-lg 2xl:max-w-2xl bg-gray-100 rounded-md hidden xl:flex items-center">
-          <select className="bg-transparent uppercase font-bold text-sm p-4 mr-4">
-            <option>All Categories</option>
-          </select>
-          <input
-            className="border-l border-gray-300 bg-transparent font-semibold text-sm pl-4 outline-none"
-            type="text"
-            placeholder="I'm searching for ..."
-          />
-          <svg
-            className="ml-auto h-5 px-4 text-gray-500"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            fill="currentColor"
-          >
-            <path d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z" />
-          </svg>
+
+        {/* Search Button for Mobile */}
+        <div className="flex sm:hidden items-center m-2">
+          {isSearchOpen ? (
+            <div className="flex items-center bg-gray-100 rounded-md px-3 py-2 w-60 transition-all duration-300">
+              <input
+                type="text"
+                className="flex-1 bg-transparent outline-none text-sm"
+                placeholder="Search..."
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
+                autoFocus
+              />
+              <button onClick={toggleSearch} className="ml-2 text-gray-400 hover:text-gray-600">
+              <i className='bx bx-x text-2xl '></i>
+              </button>
+            </div>
+          ) : (
+            <button onClick={toggleSearch} className="p-2 rounded-md">
+              <i className='bx bx-search text-2xl '></i>
+            </button>
+          )}
         </div>
 
-        {/* phone number */}
-        <div className="ml-auto md:w-48 hidden sm:flex flex-col place-items-end">
-          <span className="font-bold md:text-xl">8 800 332 65-66</span>
-          <span className="font-semibold text-sm text-gray-400">Support 24/7</span>
+        <div className="flex flex-1 justify-center px-2 sm:px-4">
+          <div className="hidden sm:flex w-full max-w-md bg-gray-100 rounded-md items-center px-4 py-2">
+            <input
+              className="flex-1 bg-transparent font-semibold text-sm outline-none placeholder-gray-400"
+              type="text"
+              placeholder="I'm searching for ..."
+            />
+            <button>
+            <i className='bx bx-search text-2xl '></i>
+            </button>
+          </div>
         </div>
 
         {/* buttons */}
         <nav className="contents">
-          <ul className="ml-4 xl:w-48 flex items-center justify-end">
-            {/* User */}
-            <li className="ml-2 lg:ml-4 relative inline-block">
-              <a href="">
-                <svg
-                  className="h-9 lg:h-10 p-2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                  fill="currentColor"
-                >
-                  <path d="M313.6 304c-28.7 0-42.5 16-89.6 16-47.1 0-60.8-16-89.6-16C60.2 304 0 364.2 0 438.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-25.6c0-74.2-60.2-134.4-134.4-134.4zM400 464H48v-25.6c0-47.6 38.8-86.4 86.4-86.4 14.6 0 38.3 16 89.6 16 51.7 0 74.9-16 89.6-16 47.6 0 86.4 38.8 86.4 86.4V464zM224 288c79.5 0 144-64.5 144-144S303.5 0 224 0 80 64.5 80 144s64.5 144 144 144z" />
-                </svg>
-              </a>
+          <ul className="flex ml-4 xl:w-48 items-center justify-end ">
+
+            
+            {/* Cart */}
+            <li className="ml-2 relative inline-block">
+                <button className=" w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100 transition">
+                  <i className="bx bx-cart text-2xl text-gray-600 hover:text-blue-500"></i>
+                </button>
             </li>
 
             {/* Heart */}
             <li className="ml-2 lg:ml-4 relative inline-block">
-              <a href="">
-                <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">3</div>
-                <svg
-                  className="h-9 lg:h-10 p-2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  fill="currentColor"
-                >
-                  <path d="M458.4 64.3C400.6 15.7 311.3 23 256 79.3 200.7 23 111.4 15.6 53.6 64.3-21.6 127.6-10.6 230.8 43 285.5l175.4 178.7c10 10.2 23.4 15.9 37.6 15.9 14.3 0 27.6-5.6 37.6-15.8L469 285.6c53.5-54.7 64.7-157.9-10.6-221.3z" />
-                </svg>
-              </a>
+                <button className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100 transition">
+                  <i className="bx bx-heart text-2xl text-gray-600 hover:text-red-500"></i>
+                </button>
             </li>
 
-            {/* Cart */}
-            <li className="ml-2 lg:ml-4 relative inline-block">
-              <a href="">
-                <div className="absolute -top-1 right-0 z-10 bg-yellow-400 text-xs font-bold px-1 py-0.5 rounded-sm">12</div>
-                <svg
-                  className="h-9 lg:h-10 p-2 text-gray-500"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 576 512"
-                  fill="currentColor"
+            {/* User */}
+            <li className="ml-2 lg:ml-4 relative inline-block" ref={dropdownRef}>
+              <button
+                onClick={toggleDropdown}
+                className="p-2"
+              >
+              <img className="w-10 h-10 sm:w-9 sm:h-9 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full object-cover" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"/>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isDropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20 animate-fade-in"
                 >
-                  <path d="M551.991 64H144.28l-8.726-44.608C133.35 8.128 123.478 0 112 0H12C5.373 0 0 5.373 0 12v24c0 6.627 5.373 12 12 12h80.24l69.594 355.701C150.796 415.201 144 430.802 144 448c0 35.346 28.654 64 64 64s64-28.654 64-64a63.681 63.681 0 0 0-8.583-32h145.167a63.681 63.681 0 0 0-8.583 32c0 35.346 28.654 64 64 64 35.346 0 64-28.654 64-64 0-18.136-7.556-34.496-19.676-46.142l1.035-4.757c3.254-14.96-8.142-29.101-23.452-29.101H203.76l-9.39-48h312.405c11.29 0 21.054-7.869 23.452-18.902l45.216-208C578.695 78.139 567.299 64 551.991 64z" />
-                </svg>
-              </a>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    My Account
+                  </a>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Orders
+                  </a>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-red-600 hover:bg-red-100"
+                  >
+                    Logout
+                  </a>
+                </div>
+              )}
             </li>
           </ul>
         </nav>
+        </div>
       </div>
-
       <hr />
     </header>
   );

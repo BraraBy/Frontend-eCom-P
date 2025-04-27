@@ -14,6 +14,23 @@
 @source "../.flowbite-react/class-list.json";
 
 
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.25s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 
 .swiper {
   width: 100%;

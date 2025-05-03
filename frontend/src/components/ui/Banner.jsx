@@ -15,7 +15,7 @@ export default function App() {
     <>
       <Swiper
         spaceBetween={30}
-        centeredSlides={true}
+        centeredSlides={false}
         loop={true}
         autoplay={{
           delay: 4000,
@@ -27,7 +27,7 @@ export default function App() {
         modules={[Autoplay, Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide><img src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide><img className="w-full h-auto object-cover" src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg" alt="" /></SwiperSlide>
         <SwiperSlide></SwiperSlide>
         <SwiperSlide></SwiperSlide>
       </Swiper>

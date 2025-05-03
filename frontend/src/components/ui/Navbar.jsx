@@ -1,6 +1,6 @@
 import React ,{ useState , useEffect , useRef }from 'react';
 
-const Header = () => {
+const Navbar = () => {
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -153,4 +153,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

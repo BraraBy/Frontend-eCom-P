@@ -1,4 +1,6 @@
 import React ,{ useState , useEffect , useRef }from 'react';
+import { useNavigate } from 'react-router-dom';
+import CartDrawer from "../Option/CartDrawer";
 
 const Navbar = () => {
 
@@ -6,6 +8,9 @@ const Navbar = () => {
   const dropdownRef = useRef(null);
   const [searchText, setSearchText] = useState('');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const navigate = useNavigate();
 
 
   const toggleDropdown = () => {
@@ -36,16 +41,18 @@ const Navbar = () => {
         document.removeEventListener('mousedown', handleClickOutside);
         document.removeEventListener('keydown', handleEscape);
       };
-    }, );
+    }, 
+  );
 
   return (
-    <header className="bg-white">
+    <header className="bg-white sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         
         {/* logo */}
         <div className="mr-auto md:w-48 flex-shrink-0">
           <img
-            className="h-8 md:h-10"
+            className="h-8 md:h-10 cursor-pointer"
+            onClick={() => navigate('/')}
             src="https://i.ibb.co/98pHdFq/2021-10-27-15h51-15.png"
             alt="Brand Logo"
           />
@@ -90,30 +97,26 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* buttons */}
+        {/* buttons */} 
         <nav className="contents">
-          <ul className="flex ml-4 xl:w-48 items-center justify-end ">
+          <ul className="flex ml-4 xl:w-48 items-center justify-end">
 
             
             {/* Cart */}
             <li className="ml-2 relative inline-block">
-                <button className=" w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100 transition">
+                <button className=" w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100 transition"
+                onClick={() => setIsCartOpen(true)}>
                   <i className="bx bx-cart text-2xl text-gray-600 hover:text-blue-500"></i>
                 </button>
             </li>
 
-            {/* Heart */}
-            <li className="ml-2 lg:ml-4 relative inline-block">
-                <button className="w-10 h-10 flex items-center justify-center rounded-md hover:bg-gray-100 transition">
-                  <i className="bx bx-heart text-2xl text-gray-600 hover:text-red-500"></i>
-                </button>
-            </li>
+            <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
 
             {/* User */}
             <li className="ml-2 lg:ml-4 relative inline-block" ref={dropdownRef}>
               <button
                 onClick={toggleDropdown}
-                className="p-2"
+                className="p-1"
               >
               <img className="w-10 h-10 sm:w-9 sm:h-9 md:w-9 md:h-9 lg:w-10 lg:h-10 rounded-full object-cover" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="Rounded avatar"/>
               </button>

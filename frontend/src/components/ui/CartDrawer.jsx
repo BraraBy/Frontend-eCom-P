@@ -112,7 +112,9 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   <h3 className="text-sm font-semibold text-black">{item.name}</h3>
                   <p className="text-xs text-gray-500">
                     Size: {item.size}, Color: {item.color}
-                    <p>Price: <span className="font-semibold text-black">{item.price}฿</span></p>
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Price: <span className="font-semibold text-black">{item.price}฿</span>
                   </p>
                   <div className="mt-2 flex items-center gap-2">
                     <button

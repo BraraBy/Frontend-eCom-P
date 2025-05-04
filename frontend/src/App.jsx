@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Footer, Banner, Product, Category } from './components/ui';
+import { Navbar, Footer, Banner, Product, Category } from './components';
 
 const App = () => {
   return (

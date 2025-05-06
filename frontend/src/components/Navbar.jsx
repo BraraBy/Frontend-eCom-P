@@ -1,48 +1,20 @@
-import React ,{ useState , useEffect , useRef }from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useNavbar } from '../hooks/useNavbar';
 import CartDrawer from "./ui/CartDrawer";
 
 const Navbar = () => {
-
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
-  const [searchText, setSearchText] = useState('');
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-
-  const navigate = useNavigate();
-
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(prev => !prev);
-  };
-
-  const toggleSearch = () => {
-    setIsSearchOpen(prev => !prev);
-  };
-
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-          setIsDropdownOpen(false);
-        }
-      };
-  
-      const handleEscape = (event) => {
-        if (event.key === 'Escape') {
-          setIsDropdownOpen(false);
-        }
-      };
-  
-      document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('keydown', handleEscape);
-  
-      return () => {
-        document.removeEventListener('mousedown', handleClickOutside);
-        document.removeEventListener('keydown', handleEscape);
-      };
-    }, 
-  );
+  const {
+    isDropdownOpen,
+    toggleDropdown,
+    dropdownRef,
+    isSearchOpen,
+    toggleSearch,
+    searchText,
+    setSearchText,
+    isCartOpen,
+    setIsCartOpen,
+    navigate
+  } = useNavbar();
 
   return (
     <header className="bg-white sticky top-0 z-50">

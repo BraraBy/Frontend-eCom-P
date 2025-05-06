@@ -6,7 +6,7 @@ const App = () => {
     <div className="bg-gray-100 min-h-screen w-full">
       <Navbar />
 
-      <div className="h-[500px] rounded-lg">
+      <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative overflow-hidden">
         <Banner />
       </div>
 

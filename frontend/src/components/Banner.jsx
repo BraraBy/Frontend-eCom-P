@@ -10,7 +10,7 @@ import '../index.css';
 
 import { Autoplay, Pagination } from 'swiper/modules';
 
-export default function App() {
+export default function Banner() {
   return (
     <>
       <Swiper
@@ -27,7 +27,9 @@ export default function App() {
         modules={[Autoplay, Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide><img className="w-full h-auto object-cover" src="https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg" alt="" /></SwiperSlide>
+        <SwiperSlide>
+          <img className="h-auto object-cover" src="/test.jfif" alt="" />
+        </SwiperSlide>
         <SwiperSlide></SwiperSlide>
         <SwiperSlide></SwiperSlide>
       </Swiper>

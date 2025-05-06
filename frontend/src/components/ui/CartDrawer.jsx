@@ -111,21 +111,21 @@ const CartDrawer = ({ isOpen, onClose }) => {
                 <div className="flex-1">
                   <h3 className="text-sm font-semibold text-black">{item.name}</h3>
                   <p className="text-xs text-gray-500">
-                    Size: {item.size}, Color: {item.color}
+                    Size : {item.size} Color : {item.color}
                   </p>
                   <p className="text-xs text-gray-500">
-                    Price: <span className="font-semibold text-black">{item.price}฿</span>
+                    Price : <span className="font-semibold text-black">{item.price}฿</span>
                   </p>
                   <div className="mt-2 flex items-center gap-2">
                     <button
-                      className="w-6 h-6 text-sm font-bold border rounded text-gray-700 hover:bg-gray-100"
+                      className="w-6 h-6 text-sm font-bold border rounded text-gray-700 hover:bg-gray-100 cursor-pointer"
                       onClick={() => decreaseQty(item.id)}
                     >
                       −
                     </button>
                     <span className="text-sm">{item.quantity}</span>
                     <button
-                      className="w-6 h-6 text-sm font-bold border rounded text-gray-700 hover:bg-gray-100"
+                      className="w-6 h-6 text-sm font-bold border rounded text-gray-700 hover:bg-gray-100 cursor-pointer"
                       onClick={() => increaseQty(item.id)}
                     >
                       +
@@ -133,7 +133,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
                   </div>
                 </div>
                 <button
-                  className="text-gray-500 hover:text-red-600"
+                  className="text-gray-500 hover:text-red-600 cursor-pointer"
                   onClick={() => removeItem(item.id)}
                 >
                   🗑
@@ -143,7 +143,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
           </ul>
 
           {cartItems.length === 0 && (
-            <p className="text-sm text-gray-400 text-center">Your cart is empty.</p>
+            <p className="text-sm text-gray-400 text-center">Your cart is empty</p>
           )}
 
           {cartItems.length > 0 && (
@@ -154,8 +154,7 @@ const CartDrawer = ({ isOpen, onClose }) => {
               </div>
 
               <button
-                className="w-full rounded-md bg-gray-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-700"
-                onClick={() => alert('Proceeding to checkout...')}
+                className="w-full rounded-md bg-gray-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-gray-700 cursor-pointer"
               >
                 Checkout
               </button>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavbar } from '../hooks/useNavbar';
 import CartDrawer from "./ui/CartDrawer";
+import { Link } from 'react-router-dom';
+
 
 const Navbar = () => {
   const {
@@ -98,24 +100,24 @@ const Navbar = () => {
                 <div
                   className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-20 animate-fade-in"
                 >
-                  <a
+                  <Link
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     My Account
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                   >
                     Orders
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-red-600 hover:bg-red-100"
+                  </Link>
+                  <Link
+                    to="/Login"
+                    className="block px-4 py-2 text-sm text-blue-600 hover:bg-blue-100"
                   >
-                    Logout
-                  </a>
+                    Sign Up
+                  </Link>
                 </div>
               )}
             </li>
